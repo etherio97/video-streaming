@@ -13,4 +13,4 @@ jobs:
       - name: FFMPEG
         uses: FedericoCarboni/setup-ffmpeg@v1
       - name: Download Video
-        run: curl -vOL '${{ github.inputs.event.source }}'
+        run: curl -vOL '${{ github.event.inputs.source }}'
