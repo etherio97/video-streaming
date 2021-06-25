@@ -1,16 +1,17 @@
-name: Download
+name: Download video to cloud storage
 on:
   workflow_dispatch:
     inputs:
       source:
         required: true
       title:
+        required: true
         default: videoplayback.mp4
 jobs:
   task:
-    env:
-      FIREBASE_CREDENTIAL_TOKEN: ${{ secrets.FIREBASE_CREDENTIAL_TOKEN }}
     runs-on: ubuntu-latest
+    env:
+      FIREBASE_CREDENTIAL_URL: ${{ secrets.FIREBASE_CREDENTIAL_URL }}
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v2

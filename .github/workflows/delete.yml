@@ -1,4 +1,4 @@
-name: Delete
+name: Delete Video from Storage
 on:
   workflow_dispatch:
     inputs:
