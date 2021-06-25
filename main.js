@@ -1,7 +1,6 @@
 const { basename, join } = require('path');
 const { existsSync, readdirSync, renameSync } = require('fs');
 const { default: axios } = require("axios");
-const { kebabCase } = require("lodash")
 const admin = require("firebase-admin");
 
 existsSync(join(__dirname, '.env')) && require('dotenv').config();
@@ -24,17 +23,14 @@ const { FIREBASE_CREDENTIAL_URL } = process.env;
 
 async function uploadFile(filePath) {
   const storage = admin.storage().bucket();
-  let fileName = basename(filePath);
-  let [name, ext] = fileName.split('.');
-  fileName = `${Date.now()}-${kebabCase(name)}.${ext}`;
-  let destFile = join(__dirname, fileName);
+  const fileName = `${Date.now()}-${basename(filePath)}`;
+  const destFile = join(__dirname, fileName);
 
   // rename with timestamp
   renameSync(filePath, destFile);
 
   console.log('uploading "%s"', fileName);
   await storage.upload(destFile);
-
   await storage.file(fileName).makePublic();
   console.log('uploaded to https://storage.googleapis.com/workflows-test-13c0a.appsppot.com/%s', fileName)
 }
