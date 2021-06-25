@@ -1,5 +1,9 @@
 {
   "name": "video-streaming",
   "version": "0.1.0",
-  "author": "Ethereal <ethereal97@gmail.com>"
+  "author": "Ethereal <ethereal97@gmail.com>",
+  "dependencies": {
+    "axios": "*",
+    "firebase": "*"
+  }
 }
