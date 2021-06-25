@@ -4,6 +4,7 @@
   "author": "Ethereal <ethereal97@gmail.com>",
   "dependencies": {
     "axios": "*",
-    "firebase": "*"
+    "firebase": "*",
+    "fast-glob": "*"
   }
 }
