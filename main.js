@@ -32,7 +32,7 @@ async function uploadFile(filePath) {
   console.log('uploading "%s"', fileName);
   await storage.upload(destFile);
   await storage.file(fileName).makePublic();
-  console.log('uploaded to https://storage.googleapis.com/workflows-test-13c0a.appsppot.com/%s', fileName)
+  console.log('uploaded to https://storage.googleapis.com/workflows-test-13c0a.appspot.com/%s', fileName)
 }
 
 function init() {
