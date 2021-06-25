@@ -1,16 +1,14 @@
-name: Download
+name: Delete
 on:
   workflow_dispatch:
     inputs:
-      source:
+      fileName:
         required: true
-      title:
-        default: videoplayback.mp4
 jobs:
   task:
+    runs-on: ubuntu-latest
     env:
       FIREBASE_CREDENTIAL_TOKEN: ${{ secrets.FIREBASE_CREDENTIAL_TOKEN }}
-    runs-on: ubuntu-latest
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v2
@@ -21,6 +19,5 @@ jobs:
       - name: Installing Dependencies
         run: npm install
       - name: Downloading Video
-        run: curl -L '${{ github.event.inputs.source }}' -o '${{ github.event.inputs.title }}' --progress-bar
       - name: Uploading Video
-        run: node index.js
+        run: node delete.js '${{ github.event.inputs.fileName }}'
