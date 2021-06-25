@@ -1,0 +1,29 @@
+name: Download video to cloud storage
+on:
+  workflow_dispatch:
+    inputs:
+      source:
+        required: true
+      title:
+        required: true
+        default: videoplayback.mp4
+jobs:
+  task:
+    runs-on: ubuntu-latest
+    env:
+      FIREBASE_CREDENTIAL_URL: ${{ secrets.FIREBASE_CREDENTIAL_URL }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: FFMPEG
+        uses: FedericoCarboni/setup-ffmpeg@v1
+      - name: Setup
+        uses: actions/setup-node@v2
+        with:
+          node-version: 14.16.0
+      - name: Download
+        run: curl -L '${{ github.event.inputs.source }}' -o '${{ github.event.inputs.title }}' --progress-bar
+      - name: Install
+        run: yarn
+      - name: Upload
+        run: node main.js
