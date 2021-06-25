@@ -4,6 +4,8 @@ on:
     inputs:
       source:
         required: true
+      title:
+        default: videoplayback.mp4
 jobs:
   task:
     runs-on: ubuntu-latest
@@ -17,6 +19,6 @@ jobs:
       - name: Installing Dependencies
         run: npm install
       - name: Downloading Video
-        run: curl -L '${{ github.event.inputs.source }}' -o 'videoplayback.mp4' --progress-bar
+        run: curl -L '${{ github.event.inputs.source }}' -o '${{ github.event.inputs.title }}' --progress-bar
       - name: Uploading Video
         run: node index.js

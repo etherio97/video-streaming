@@ -1,10 +1,29 @@
 {
   "name": "video-streaming",
-  "version": "0.1.0",
-  "author": "Ethereal <ethereal97@gmail.com>",
+  "version": "1.0.0",
+  "description": "",
+  "main": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/htoomyat1991998/video-streaming.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/htoomyat1991998/video-streaming/issues"
+  },
+  "homepage": "https://github.com/htoomyat1991998/video-streaming#readme",
   "dependencies": {
-    "axios": "*",
-    "firebase": "*",
-    "fast-glob": "*"
-  }
+    "axios": "^0.21.1",
+    "dotenv": "^10.0.0",
+    "env": "^0.0.2",
+    "fast-glob": "^3.2.5",
+    "firebase-admin": "^9.10.0",
+    "lodash": "^4.17.21"
+  },
+  "devDependencies": {}
 }
