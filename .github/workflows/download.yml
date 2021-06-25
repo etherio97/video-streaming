@@ -1,0 +1,16 @@
+name: Download
+on:
+  workflow_dispatch:
+    inputs:
+      source:
+        required: true
+jobs:
+  task:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: FFMPEG
+        uses: FedericoCarboni/setup-ffmpeg@v1
+      - name: Download Video
+        run: curl -vOL '${{ github.inputs.event.source }}'
