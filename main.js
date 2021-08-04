@@ -2,6 +2,7 @@ const { basename, join } = require('path');
 const { existsSync, readdirSync, renameSync } = require('fs');
 const { default: axios } = require("axios");
 const admin = require("firebase-admin");
+const fileName = process.argv[2];
 
 existsSync(join(__dirname, '.env')) && require('dotenv').config();
 
@@ -9,7 +10,7 @@ const { FIREBASE_CREDENTIAL_URL } = process.env;
 
 !async function () {
   await init();
-  const videos = readdirSync(__dirname, { encoding: 'utf-8' }).filter(file => file.includes('.mp4'));
+  const videos = readdirSync(__dirname, { encoding: 'utf-8' }).filter(file => file.includes(fileName));
   console.log('[info] uploading %d file(s)...', videos.length);
   for (let video of videos) {
     await uploadFile(video)
@@ -22,17 +23,18 @@ const { FIREBASE_CREDENTIAL_URL } = process.env;
 });
 
 async function uploadFile(filePath) {
+  const now = Date.now();
   const storage = admin.storage().bucket();
-  const fileName = `${Date.now()}-${basename(filePath)}`;
-  const destFile = join(__dirname, fileName);
+  const newFileName = now + '-' + fileName;
+  const destFile = join(__dirname, newFileName);
 
   // rename with timestamp
   renameSync(filePath, destFile);
 
-  console.log('uploading "%s"', fileName);
+  console.log('uploading "%s"', newFileName);
   await storage.upload(destFile);
-  await storage.file(fileName).makePublic();
-  console.log('uploaded to https://storage.googleapis.com/workflows-test-13c0a.appspot.com/%s', fileName)
+  await storage.file(newFileName).makePublic();
+  console.log('uploaded to https://storage.googleapis.com/workflows-test-13c0a.appspot.com/%s', newFileName)
 }
 
 function init() {
