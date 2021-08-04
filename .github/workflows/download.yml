@@ -24,4 +24,4 @@ jobs:
       - name: Install
         run: yarn
       - name: Upload
-        run: node main.js
+        run: node main.js '${{ github.event.inputs.title }}'
