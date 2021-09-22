@@ -20,7 +20,7 @@ jobs:
         with:
           node-version: 14.16.0
       - name: Download
-        run: wget -q '${{ github.event.inputs.source }}' -O '${{ github.event.inputs.title }}'
+        run: wget '${{ github.event.inputs.source }}' -O '${{ github.event.inputs.title }}'
       - name: Install
         run: yarn
       - name: Upload
