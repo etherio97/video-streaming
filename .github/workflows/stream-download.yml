@@ -22,7 +22,7 @@ jobs:
         with:
           node-version: 14.16.0
       - name: Download
-        run: ffmpeg -y -i '${{ github.event.inputs.source }}' -c:v libx264 -c:a aac '${{ github.event.inputs.title }}'
+        run: ffmpeg -y -i '${{ github.event.inputs.source }}' -c:v libx264 -c:a aac -f mp4 '${{ github.event.inputs.title }}'
       - name: Install
         run: yarn
       - name: Upload
