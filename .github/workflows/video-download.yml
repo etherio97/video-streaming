@@ -1,4 +1,4 @@
-name: Upload Video
+name: Download video to cloud storage
 on:
   workflow_dispatch:
     inputs:
