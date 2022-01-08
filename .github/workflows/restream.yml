@@ -3,7 +3,9 @@ name: Restream
 on:
   workflow_dispatch:
     inputs:
-      source_url:
+      title:
+        required: true
+      source:
         required: true
 jobs:
   restream:
@@ -18,4 +20,6 @@ jobs:
         with:
           node-version: 14.16.0
       - run: npm install
-      - run: node stream.js '${{ github.event.inputs.source_url }}'
+      - run: node stream.js '${{ github.event.inputs.title }}'
+      - run: ffmpeg -re -i '${{ github.event.inputs.source }}' -c:v libx264 -preset veryfast -tune zerolatency -b:v 2M -minrate 1M -maxrate 2M -bufsize 2M -c:a aac -b:a 1M -bufsize 1M -f flv "$(cat ./config)"
+    
